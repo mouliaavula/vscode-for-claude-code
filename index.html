@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Compound Growth Calculator</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">📈</span>
+      <span class="brand-name">Compound Growth Calculator</span>
+    </div>
+    <p class="brand-tagline">See how your initial investment + regular contributions grow over time</p>
+  </header>
+
+  <main class="layout">
+
+    <!-- INPUT PANEL -->
+    <section class="card form-card">
+      <h2 class="card-title">Your Inputs</h2>
+
+      <div class="field">
+        <label for="initial">Initial Investment</label>
+        <div class="input-prefix">
+          <span>₹</span>
+          <input type="number" id="initial" value="1000000" min="0" step="1000" />
+        </div>
+        <span class="hint" id="initialHint"></span>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="contribution">Contribution Amount</label>
+          <div class="input-prefix">
+            <span>₹</span>
+            <input type="number" id="contribution" value="10000" min="0" step="500" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="contributionFreq">Contribution Frequency</label>
+          <select id="contributionFreq">
+            <option value="1">Monthly</option>
+            <option value="3">Quarterly</option>
+            <option value="6">Half-Yearly</option>
+            <option value="12" selected>Yearly</option>
+            <option value="0">No regular contribution</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="rate">Annual Interest Rate</label>
+          <div class="input-suffix">
+            <input type="number" id="rate" value="10" min="0" max="50" step="0.1" />
+            <span>%</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="compoundFreq">Compounding Frequency</label>
+          <select id="compoundFreq">
+            <option value="1">Monthly</option>
+            <option value="3">Quarterly</option>
+            <option value="6">Half-Yearly</option>
+            <option value="12" selected>Yearly</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="years">Investment Duration: <strong><span id="yearsLabel">20</span> years</strong></label>
+        <input type="range" id="years" min="1" max="40" value="20" />
+        <div class="range-ticks"><span>1</span><span>10</span><span>20</span><span>30</span><span>40</span></div>
+      </div>
+
+      <button id="calcBtn" class="calc-btn">Calculate Growth</button>
+    </section>
+
+    <!-- RESULTS PANEL -->
+    <section class="results">
+      <div class="stat-grid">
+        <div class="stat-card stat-total">
+          <span class="stat-label">Future Value</span>
+          <span class="stat-value" id="statTotal">₹0</span>
+        </div>
+        <div class="stat-card stat-invested">
+          <span class="stat-label">Total Invested</span>
+          <span class="stat-value" id="statInvested">₹0</span>
+        </div>
+        <div class="stat-card stat-interest">
+          <span class="stat-label">Interest Earned</span>
+          <span class="stat-value" id="statInterest">₹0</span>
+        </div>
+        <div class="stat-card stat-multiplier">
+          <span class="stat-label">Growth Multiple</span>
+          <span class="stat-value" id="statMultiplier">0x</span>
+        </div>
+      </div>
+
+      <div class="card chart-card">
+        <h2 class="card-title">Growth Over Time</h2>
+        <canvas id="growthChart" height="320"></canvas>
+      </div>
+
+      <div class="card table-card">
+        <div class="table-card-header">
+          <h2 class="card-title">Year-by-Year Breakdown</h2>
+          <button id="toggleTableBtn" class="toggle-btn">Show</button>
+        </div>
+        <div class="table-wrap" id="tableWrap" hidden>
+          <table id="breakdownTable">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Invested This Year</th>
+                <th>Total Invested</th>
+                <th>Interest This Year</th>
+                <th>Year-End Value</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">Estimates only — actual returns vary with market conditions.</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
